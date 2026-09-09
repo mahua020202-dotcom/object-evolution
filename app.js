@@ -41,8 +41,8 @@ function setEra(index,local,global){
 }
 function update(){const maxScroll=document.documentElement.scrollHeight-innerHeight,pageProgress=maxScroll>0?scrollY/maxScroll:0;progressBar.style.width=`${pageProgress*100}%`;
   const heroProgress=opening?clamp(scrollY/Math.max(innerHeight,1)):0;
-  if(openingCopy){openingCopy.style.transform=`translate3d(0,${heroProgress*-28}px,0)`;openingCopy.style.opacity=String(1-heroProgress*.55)}
-  if(openingProduct){openingProduct.style.transform=`translate3d(${heroProgress*18}px,${heroProgress*-18}px,0) rotate(${4+heroProgress*3}deg) scale(${1-heroProgress*.04})`;openingProduct.style.opacity=String(1-heroProgress*.45)}
+  if(openingCopy){openingCopy.style.transform=`translate3d(0,calc(-54% + ${heroProgress*-28}px),0)`;openingCopy.style.opacity=String(1-heroProgress*.55)}
+  if(openingProduct){openingProduct.style.transform=`translate3d(${heroProgress*18}px,calc(-50% + ${heroProgress*-18}px),0) rotate(${4+heroProgress*3}deg) scale(${1-heroProgress*.04})`;openingProduct.style.opacity=String(1-heroProgress*.45)}
   if(openingScroll){openingScroll.style.opacity=String(.75*(1-heroProgress*1.6))}
   const rect=evolution.getBoundingClientRect(),range=Math.max(evolution.offsetHeight-innerHeight,1),progress=clamp(-rect.top/range),position=progress*(ERAS.length-1),index=Math.min(Math.floor(position),ERAS.length-2),local=position-index;eraProgress.style.width=`${progress*100}%`;setEra(index,local,progress)}
 function setupRevealAnimations(){const reveal=document.querySelectorAll(".statement,.timeline-list,.timeline-item,.collection-card");if(!("IntersectionObserver" in window)){reveal.forEach(el=>el.classList.add("is-visible"));return}const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("is-visible");observer.unobserve(entry.target)}}),{threshold:.16,rootMargin:"0px 0px -8% 0px"});reveal.forEach(el=>observer.observe(el))}
