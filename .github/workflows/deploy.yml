@@ -28,6 +28,17 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Inject motion refinements
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('</head>','<link rel="stylesheet" href="./motion-fixes.css" />\n</head>')
+          s=s.replace('</body>','<script src="./motion-fixes.js" defer></script>\n</body>')
+          p.write_text(s,encoding='utf-8')
+          PY
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
