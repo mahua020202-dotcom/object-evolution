@@ -9,7 +9,7 @@ const ERAS=[
 ];
 const COLLECTIONS=[["01","汽车","从机械动力到电动与智能化"],["02","电脑","从巨型计算机到个人 AI"],["03","相机","从胶片到计算摄影"],["04","电视","从黑白屏幕到流媒体"],["05","手表","从计时到腕上计算"]];
 const $=id=>document.getElementById(id),clamp=(v,min=0,max=1)=>Math.min(Math.max(v,min),max),lerp=(a,b,t)=>a+(b-a)*t;
-const progressBar=$("progress-bar"),evolution=document.querySelector(".evolution"),opening=document.querySelector(".opening"),openingCopy=document.querySelector(".opening-copy"),openingProduct=document.querySelector(".opening-product"),openingScroll=document.querySelector(".opening-scroll"),productImage=$("product-image"),ghostA=$("ghost-a"),ghostB=$("ghost-b"),stack=$("product-stack"),bg=$("evolution-bg"),eraWatermark=$("era-watermark"),eraIndex=$("era-index"),eraYear=$("era-year"),eraTitle=$("era-title"),eraDescription=$("era-description"),eraStat=$("era-stat"),eraStatLabel=$("era-stat-label"),eraCaption=$("era-caption"),detailLeft=$("detail-left"),detailRight=$("detail-right"),eraProgress=$("era-progress"),explodeLines=$("explode-lines"),dots=$("era-dots");
+const progressBar=$("progress-bar"),evolution=document.querySelector(".evolution"),opening=document.querySelector(".opening"),openingCopy=document.querySelector(".opening-copy"),openingProduct=document.querySelector(".opening-product"),openingScroll=document.querySelector(".opening-scroll"),productImage=$("product-image"),ghostA=$("ghost-a"),ghostB=$("ghost-b"),stack=$("product-stack"),stage=$("product-stage"),bg=$("evolution-bg"),eraWatermark=$("era-watermark"),eraIndex=$("era-index"),eraYear=$("era-year"),eraTitle=$("era-title"),eraDescription=$("era-description"),eraStat=$("era-stat"),eraStatLabel=$("era-stat-label"),eraCaption=$("era-caption"),detailLeft=$("detail-left"),detailRight=$("detail-right"),eraProgress=$("era-progress"),explodeLines=$("explode-lines"),dots=$("era-dots");
 let lastProgress=0;
 ERAS.forEach(({image})=>{const img=new Image();img.decoding="async";img.src=image});
 function renderDots(){dots.innerHTML=ERAS.map((e,i)=>`<button type="button" aria-label="跳到 ${e.year}" data-index="${i}"></button>`).join("");dots.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{const i=+b.dataset.index;const target=evolution.offsetTop+(evolution.offsetHeight-innerHeight)*(i/(ERAS.length-1));scrollTo({top:target,behavior:"smooth"})}))}
@@ -18,9 +18,11 @@ function renderCollections(){document.getElementById("collection-grid").innerHTM
 function setEra(index,local,global){
   const from=ERAS[index],to=ERAS[Math.min(index+1,ERAS.length-1)];
   const transition=index<ERAS.length-1?clamp((local-.38)/.5):0;
+  const morph=clamp((transition-.08)/.84);
   const changing=index<ERAS.length-1&&local>.68;
   const current=changing?to:from,currentIndex=changing?index+1:index;
   eraIndex.textContent=String(currentIndex+1).padStart(2,"0");eraYear.textContent=current.year;eraWatermark.textContent=current.year;eraTitle.innerHTML=current.title;eraDescription.textContent=current.description;eraStat.textContent=current.stat;eraStatLabel.textContent=current.statLabel;eraCaption.textContent=current.caption;detailLeft.textContent=current.left;detailRight.textContent=current.right;
+  stage.dataset.era=current.year;
   const completed=transition>=.98||index===ERAS.length-1;
   if(productImage.dataset.src!==from.image&&productImage.dataset.src!==to.image) productImage.dataset.src=from.image;
   if(index===ERAS.length-1){if(productImage.dataset.src!==to.image){productImage.dataset.src=to.image;productImage.src=to.image}productImage.style.opacity="1"}else if(completed){if(productImage.dataset.src!==to.image){productImage.dataset.src=to.image;productImage.src=to.image}productImage.style.opacity="1"}else{if(productImage.dataset.src!==from.image){productImage.dataset.src=from.image;productImage.src=from.image}productImage.style.opacity=String(1-transition)}
@@ -29,15 +31,27 @@ function setEra(index,local,global){
   const pulse=Math.sin(local*Math.PI);
   const scale=lerp(.9,1.06,pulse*.16+.5)*current.fit;
   const y=Math.sin(global*Math.PI*2)*-18;
-  productImage.style.transform=`translate3d(0,${y}px,0) rotateX(${lerp(2,-3,local)}deg) rotateY(${spin}deg) rotateZ(${localSpin}deg) scale(${scale})`;
-  productImage.style.filter=`grayscale(.18) contrast(.96) saturate(.9) drop-shadow(${lerp(24,38,scale-.9)}px ${lerp(38,58,scale-.9)}px ${lerp(26,44,scale-.9)}px rgba(0,0,0,.20))`;
+  const lift=lerp(0,-46,morph);
+  const morphRotate=lerp(0,18,morph);
+  const morphScale=lerp(1,1.11,morph);
+  const blur=lerp(0,2.4,Math.sin(morph*Math.PI));
+  const clipInset=lerp(0,7,Math.sin(morph*Math.PI));
+  productImage.style.transform=`translate3d(0,${y+lift}px,0) rotateX(${lerp(2,-3,local)}deg) rotateY(${spin+morphRotate}deg) rotateZ(${localSpin}deg) scale(${scale*morphScale})`;
+  productImage.style.filter=`grayscale(${lerp(.18,.05,morph)}) contrast(${lerp(.96,1.05,morph)}) saturate(${lerp(.9,1,morph)}) blur(${blur}px) drop-shadow(${lerp(24,38,scale-.9)}px ${lerp(38,58,scale-.9)}px ${lerp(26,44,scale-.9)}px rgba(0,0,0,.20))`;
+  productImage.style.clipPath=`inset(${clipInset}% ${clipInset*.72}% ${clipInset}% ${clipInset*.72}% round ${lerp(0,18,morph)}px)`;
   ghostA.src=from.image;ghostB.src=to.image;ghostA.style.opacity=transition*.26;ghostB.style.opacity=transition*.95;
-  ghostA.style.transform=`translate3d(${transition*-105}px,${transition*-38}px,0) rotateY(${transition*-20}deg) rotateZ(${transition*-8}deg) scale(${(1+transition*.13)*from.fit})`;
-  ghostB.style.transform=`translate3d(${transition*105}px,${transition*46}px,0) rotateY(${transition*20}deg) rotateZ(${transition*8}deg) scale(${(1+transition*.18)*to.fit})`;
+  const spread=105+Math.sin(morph*Math.PI)*28;
+  ghostA.style.transform=`translate3d(${transition*-spread}px,${transition*(-38-28*morph)}px,0) rotateY(${transition*(-20-12*morph)}deg) rotateZ(${transition*(-8-8*morph)}deg) scale(${(1+transition*.13)*from.fit})`;
+  ghostB.style.transform=`translate3d(${transition*spread}px,${transition*(46+32*morph)}px,0) rotateY(${transition*(20+12*morph)}deg) rotateZ(${transition*(8+8*morph)}deg) scale(${(1+transition*.18)*to.fit})`;
+  ghostA.style.filter=`blur(${lerp(.4,1.8,morph)}px) grayscale(${lerp(.08,.4,morph)}) contrast(.9)`;
+  ghostB.style.filter=`blur(${lerp(.4,0,morph)}px) grayscale(${lerp(.08,0,morph)}) contrast(${lerp(.96,1.05,morph)})`;
   if(completed){ghostA.style.opacity="0";ghostB.style.opacity="0"}
-  explodeLines.style.opacity=transition>.05&&transition<.98?Math.min(transition*2.2,1)*.72:0;explodeLines.style.transform=`translateY(-50%) rotate(${global*42}deg) scale(${.7+transition*.45})`;stack.style.transform=`translateY(-50%) scale(${1+pulse*.035})`;
+  explodeLines.style.opacity=transition>.05&&transition<.98?Math.min(transition*2.2,1)*.72:0;explodeLines.style.transform=`translateY(-50%) rotate(${global*42+morph*55}deg) scale(${.7+transition*.45+morph*.16})`;stack.style.transform=`translateY(-50%) scale(${1+pulse*.035})`;
   bg.style.background=current.year==="2026"?"radial-gradient(circle at 72% 48%,rgba(100,113,255,.22) 0,rgba(186,106,255,.10) 23%,#f3f3f1 55%,#e9e9e7 100%)":"radial-gradient(circle at 67% 48%,#fff 0,#f5f5f2 37%,#eeeeec 100%)";
-  eraWatermark.style.transform=`translate3d(${Math.sin(global*Math.PI)*20}px,-50%,0) scale(${1+Math.sin(global*Math.PI)*.06})`;eraWatermark.style.opacity=String(.07+Math.sin(local*Math.PI)*.03);dots.querySelectorAll("button").forEach((b,i)=>b.classList.toggle("active",i===currentIndex));lastProgress=global;
+  eraWatermark.style.transform=`translate3d(${Math.sin(global*Math.PI)*20}px,-50%,0) scale(${1+Math.sin(global*Math.PI)*.06})`;eraWatermark.style.opacity=String(.07+Math.sin(local*Math.PI)*.03);
+  const copyLift=transition>0?Math.sin(Math.min(transition,1)*Math.PI)*12:0;
+  eraTitle.style.transform=`translate3d(0,${-copyLift}px,0)`;eraDescription.style.transform=`translate3d(0,${copyLift*.55}px,0)`;eraDescription.style.opacity=String(1-Math.sin(Math.min(transition,1)*Math.PI)*.18);
+  dots.querySelectorAll("button").forEach((b,i)=>b.classList.toggle("active",i===currentIndex));lastProgress=global;
 }
 function update(){const maxScroll=document.documentElement.scrollHeight-innerHeight,pageProgress=maxScroll>0?scrollY/maxScroll:0;progressBar.style.width=`${pageProgress*100}%`;
   const heroProgress=opening?clamp(scrollY/Math.max(innerHeight,1)):0;
