@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="物品演化史，一个记录物品从过去走向未来的数字博物馆。" />
+    <title>物品演化史 · Object Evolution</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="eyebrow">OBJECT EVOLUTION · DIGITAL MUSEUM</div>
+        <h1>一件物品，<br /><span>走过了多少年？</span></h1>
+        <p>从手机开始，沿着时间轴回望一件物品如何被技术、需求与生活方式一次次重新定义。</p>
+      </header>
+
+      <main>
+        <section class="museum-card" aria-labelledby="object-title">
+          <div class="section-head">
+            <div>
+              <span class="label">CURRENT COLLECTION</span>
+              <h2 id="object-title">手机</h2>
+            </div>
+            <span class="collection-count" id="collection-count">01 / 06</span>
+          </div>
+
+          <nav class="object-tabs" id="object-tabs" aria-label="物品分类"></nav>
+
+          <div class="timeline-wrap">
+            <div class="timeline-track"></div>
+            <div class="timeline-progress" id="timeline-progress"></div>
+            <div class="timeline-points" id="timeline-points"></div>
+          </div>
+
+          <article class="stage">
+            <div class="visual" id="visual" aria-hidden="true">
+              <div class="visual-orbit"></div>
+              <div class="object-symbol" id="object-symbol">📻</div>
+              <div class="visual-year" id="visual-year">1973</div>
+            </div>
+            <div class="stage-copy">
+              <span class="stage-index" id="stage-index">STAGE 01 / 07</span>
+              <h3 id="stage-title">移动通信的早期形态</h3>
+              <p class="stage-subtitle" id="stage-subtitle">手机还很大，但人类第一次真正把电话带到了户外。</p>
+              <ul id="stage-facts"></ul>
+            </div>
+          </article>
+
+          <div class="controls">
+            <button id="previous" type="button">← 上一个时代</button>
+            <button id="next" type="button">下一个时代 →</button>
+          </div>
+        </section>
+
+        <section class="idea-section">
+          <div>
+            <span class="label">THE BIG IDEA</span>
+            <h2>物品不会突然变成今天的样子。</h2>
+          </div>
+          <p>每一次变化背后，都有新的技术、新的需求，或者新的生活方式。未来这里还会加入汽车、电脑、相机、电视、手表，让整个网站慢慢变成一座可以不断扩展的「物品演化史博物馆」。</p>
+        </section>
+      </main>
+
+      <footer>OBJECT EVOLUTION · FROM OBJECTS TO STORIES</footer>
+    </div>
+    <script src="./app.js" defer></script>
+  </body>
+</html>
