@@ -13,12 +13,22 @@
   .timeline-section{padding-left:24px!important;padding-right:24px!important;overflow:hidden!important}
   .timeline-list{width:100%!important;max-width:none!important;margin-top:56px!important;position:relative!important;padding-left:0!important;overflow:visible!important}
   .timeline-list:before{display:block!important;content:""!important;position:absolute!important;left:0!important;top:0!important;width:1px!important;height:100%!important;background:#111!important}
-  .timeline-item{display:grid!important;grid-template-columns:82px minmax(0,1fr)!important;gap:18px!important;width:100%!important;min-width:0!important;margin:0!important;padding:23px 0!important;align-items:start!important;transform:none!important;opacity:1!important}
+  .timeline-item{display:grid!important;grid-template-columns:82px minmax(0,1fr)!important;gap:18px!important;width:100%!important;min-width:0!important;margin:0!important;padding:23px 0!important;align-items:start!important}
   .timeline-item:hover{padding-left:0!important;padding-right:0!important}
   .timeline-item strong{font-size:21px!important;line-height:1.05!important;letter-spacing:-.045em!important;min-width:0!important}
-  .timeline-item h3{font-size:19px!important;line-height:1.2!important;margin:0 0 7px!important;min-width:0!important;overflow-wrap:anywhere!important}
-  .timeline-item p{font-size:12px!important;line-height:1.55!important;min-width:0!important;overflow-wrap:anywhere!important}
+  .timeline-item h3{font-size:19px!important;line-height:1.2!important;margin:0 0 7px!important;min-width:0!important;overflow-wrap:anywhere!important;word-break:break-word!important;white-space:normal!important}
+  .timeline-item p{font-size:12px!important;line-height:1.55!important;min-width:0!important;overflow-wrap:anywhere!important;word-break:break-word!important;white-space:normal!important}
   .timeline-item em{display:none!important}
+}
+
+/* On truly narrow or heavily zoomed screens, stack each year above its copy. This removes the cramped two-column squeeze entirely. */
+@media(max-width:600px){
+  .timeline-section{padding-left:16px!important;padding-right:16px!important}
+  .timeline-list{margin-top:42px!important;width:100%!important}
+  .timeline-item{grid-template-columns:minmax(0,1fr)!important;gap:7px!important;padding:20px 0 20px 16px!important;box-sizing:border-box!important}
+  .timeline-item strong{font-size:18px!important;line-height:1!important}
+  .timeline-item h3{font-size:18px!important;line-height:1.28!important;margin:0 0 6px!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:break-word!important}
+  .timeline-item p{font-size:12px!important;line-height:1.55!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:break-word!important}
 }
 
 @media(max-width:850px){
