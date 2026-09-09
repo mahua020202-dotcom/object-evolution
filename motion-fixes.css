@@ -3,7 +3,6 @@
 .product-image.ghost.ghost-a{opacity:.08!important}
 .product-image.ghost.ghost-b{opacity:.32!important}
 
-/* 2000 → 2007: the museum room falls away and the screen becomes the scene. */
 .evolution.screen-transition{--screen-progress:.5}
 .evolution.screen-transition .evolution-bg{background:radial-gradient(circle at 67% 48%,rgba(104,116,255,calc(var(--screen-progress)*.30)),#111116 56%,#050507 100%)!important;transition:background .15s linear}
 .evolution.screen-transition .evolution-sticky:after{content:"THE SCREEN BECOMES THE INTERFACE";position:absolute;z-index:12;left:50%;bottom:11%;width:min(92vw,760px);transform:translate(-50%,calc(18px - var(--screen-progress)*18px));text-align:center;font:600 clamp(11px,1.1vw,15px)/1.2 Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;letter-spacing:.34em;color:rgba(255,255,255,calc(.08 + var(--screen-progress)*.78));white-space:nowrap;pointer-events:none}
@@ -13,7 +12,6 @@
 .evolution.screen-transition .era-title,.evolution.screen-transition #era-title{color:#fff!important}
 .evolution.screen-transition .era-watermark{color:#fff;opacity:.05!important}
 
-/* AI finale: the narrative stays readable while the phone and field slowly converge. */
 .statement-ai{position:relative;isolation:isolate;overflow:hidden}
 .statement-ai .ai-grid,.statement-ai .ai-orbit,.statement-ai .ai-product{pointer-events:none}
 .statement-ai .ai-copy{position:absolute;z-index:30;left:max(30px,calc((100vw - 1240px)/2));top:0;margin-left:0;padding-top:18vh;width:min(570px,48vw);pointer-events:none}
@@ -25,11 +23,19 @@
 .statement-ai .ai-product{z-index:10;transform:translateY(calc(-50% - (var(--ai-progress,0)*14px))) rotate(calc(7deg - var(--ai-progress,0)*5deg)) scale(calc(.94 + var(--ai-progress,0)*.06))}
 .statement-ai .ai-orbit{z-index:4;transform:translate(-50%,-50%) scale(calc(.92 + var(--ai-progress,0)*.12));opacity:calc(.62 + var(--ai-progress,0)*.32)}
 .statement-ai .ai-grid{opacity:calc(.28 + var(--ai-progress,0)*.28)}
-.statement-ai .ai-word{position:relative;z-index:32;color:#fff!important}
-.statement-ai .ai-word{letter-spacing:-.08em;text-shadow:0 10px 55px rgba(110,120,255,.24)}
+.statement-ai .ai-word{position:relative;z-index:32;color:#fff!important;letter-spacing:-.08em;text-shadow:0 10px 55px rgba(110,120,255,.24)}
 .statement-ai.ai-focus .ai-word{transform:translateY(0) scale(1.025)!important}
 .statement-ai.ai-intent .ai-word{color:#fff!important;text-shadow:0 0 70px rgba(145,150,255,.38)}
 .statement-ai:after{content:"VOICE  ·  VISION  ·  CONTEXT  ·  INTENT";position:absolute;z-index:25;left:50%;bottom:7%;transform:translateX(-50%);font:600 9px/1 Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;letter-spacing:.28em;color:rgba(255,255,255,.34);white-space:nowrap;pointer-events:none}
+
+/* 2026 is an evolution chapter, not a claim that Pixel 10 launched in 2026. */
+.product-stage[data-era="2026"]:after{content:"AI HARDWARE REFERENCE · 2025";position:absolute;right:7%;bottom:17%;z-index:8;font:600 8px/1 Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;letter-spacing:.18em;color:rgba(70,70,80,.48);white-space:nowrap}
+
+/* Make 2007 feel like a true visual handoff: light collapses, then the screen takes over. */
+.evolution.screen-transition .evolution-bg{background:radial-gradient(circle at 67% 48%,rgba(124,135,255,calc(var(--screen-progress)*.42)),rgba(20,20,27,calc(.92 - var(--screen-progress)*.18)) 48%,#050507 100%)!important}
+.evolution.screen-transition .evolution-sticky:before{background:linear-gradient(90deg,transparent 0 18%,rgba(150,160,255,calc(var(--screen-progress)*.08)) 50%,transparent 82%);border-color:rgba(255,255,255,calc(var(--screen-progress)*.28));box-shadow:0 0 calc(35px + var(--screen-progress)*95px) rgba(120,130,255,calc(var(--screen-progress)*.34)),inset 0 0 calc(30px + var(--screen-progress)*80px) rgba(120,130,255,calc(var(--screen-progress)*.14))}
+.evolution.screen-transition .era-copy,.evolution.screen-transition .era-caption,.evolution.screen-transition .product-detail{opacity:calc(1 - var(--screen-progress)*.62);transition:opacity .12s linear}
+.evolution.screen-transition .product-image.active{transform:translate3d(0,calc(var(--screen-progress)*-8px),0) scale(calc(1 + var(--screen-progress)*.06))!important}
 
 @media(max-width:850px){
   .statement-ai .ai-copy{left:24px;right:24px;width:auto;padding-top:12vh}
@@ -38,6 +44,7 @@
   .statement-ai:after{left:24px;right:24px;transform:none;white-space:normal;text-align:left;letter-spacing:.16em;line-height:1.6}
   .evolution.screen-transition .evolution-sticky:after{left:24px;width:calc(100vw - 48px);bottom:8%;white-space:normal;letter-spacing:.2em}
   .evolution.screen-transition .evolution-sticky:before{left:50%;top:57%;width:52vw;height:68vw}
+  .product-stage[data-era="2026"]:after{right:24px;bottom:18%;font-size:7px;letter-spacing:.12em}
   .product-image.ghost{mask-image:radial-gradient(ellipse 44% 52% at 50% 50%,#000 0 62%,transparent 90%);-webkit-mask-image:radial-gradient(ellipse 44% 52% at 50% 50%,#000 0 62%,transparent 90%)}
 }
 
