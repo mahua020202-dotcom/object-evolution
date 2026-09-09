@@ -7,7 +7,6 @@
   <title>手机 · Object Evolution</title>
   <link rel="stylesheet" href="./styles.css" />
   <style>
-    /* Hero polish: make the first screen feel like a product launch, not a poster. */
     .opening{background:#f7f7f5;display:block;padding:0;isolation:isolate}
     .opening:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.46),transparent 32%,rgba(0,0,0,.025));pointer-events:none}
     .opening-copy{position:absolute;z-index:5;left:max(30px,calc((100vw - 1240px)/2));top:50%;transform:translateY(-54%);max-width:650px}
@@ -15,12 +14,25 @@
     .opening h1{margin:0 0 34px;font-size:clamp(92px,13vw,190px);line-height:.82;letter-spacing:-.1em}
     .opening-line{font-size:clamp(28px,3.7vw,54px);line-height:1.04;letter-spacing:-.055em}
     .opening-line span{display:inline-block;margin-top:7px;color:#a4a4a6}
-    .opening-product{right:4%;top:53%;width:min(47vw,650px);height:86vh;transform:translateY(-50%) rotate(4deg);}
+    .opening-product{right:4%;top:53%;width:min(47vw,650px);height:86vh;transform:translateY(-50%) rotate(4deg)}
     .opening-product:before{width:82%;background:radial-gradient(circle,#fff 0,rgba(220,222,226,.7) 35%,transparent 70%);filter:blur(24px)}
     .opening-product:after{content:"";position:absolute;z-index:1;bottom:8%;width:46%;height:5%;border-radius:50%;background:rgba(0,0,0,.16);filter:blur(26px);transform:rotateX(68deg)}
     .opening-product img{height:min(82vh,840px);filter:drop-shadow(28px 46px 36px rgba(0,0,0,.22));mix-blend-mode:multiply}
     .opening-meta{left:max(30px,calc((100vw - 1240px)/2));right:auto;bottom:34px}
     .opening-scroll{bottom:30px;opacity:.75}
+
+    /* Museum-grade product stage */
+    .product-stage{perspective:1600px}
+    .product-stage:before{content:"";position:absolute;left:52%;top:14%;width:1px;height:72%;background:linear-gradient(transparent,rgba(0,0,0,.08),transparent);opacity:.7}
+    .product-aura{width:min(46vw,680px);height:min(46vw,680px);right:8%;background:radial-gradient(circle,rgba(255,255,255,1) 0,rgba(239,240,238,.78) 31%,rgba(220,222,222,.28) 53%,transparent 72%);filter:blur(8px)}
+    .product-floor{width:min(30vw,430px);height:55px;right:17%;bottom:13%;background:rgba(0,0,0,.13);filter:blur(30px)}
+    .product-image-stack{right:14%;width:min(36vw,500px);height:84vh;transform:translateY(-50%) rotateY(-8deg);transform-style:preserve-3d}
+    .product-image{height:min(76vh,780px);max-width:88%;filter:drop-shadow(18px 32px 24px rgba(0,0,0,.17)) contrast(1.02) saturate(.88);transition:filter .5s ease}
+    .product-image.ghost{filter:blur(.4px) drop-shadow(14px 25px 22px rgba(0,0,0,.1)) grayscale(.08);mix-blend-mode:multiply}
+    .product-detail{font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:8px;letter-spacing:.2em;color:#7d7d82}
+    .detail-left{right:calc(14% + min(36vw,500px) - 20px)}
+    .detail-right{right:8%}
+    .era-caption{font-size:8px;letter-spacing:.2em}
 
     @media(max-width:850px){
       .opening{min-height:100svh;padding:0;background:#f7f7f5}
@@ -29,69 +41,43 @@
       .opening h1{margin-bottom:24px;font-size:clamp(78px,23vw,112px);line-height:.8;letter-spacing:-.105em}
       .opening-line{font-size:clamp(27px,8.2vw,38px);line-height:1.02;letter-spacing:-.06em}
       .opening-line span{margin-top:5px;color:#9a9a9e}
-      .opening-product{right:50%;top:65%;width:88vw;height:58vh;transform:translate(50%,-50%) rotate(3deg);opacity:1}
+      .opening-product{right:50%;top:65%;width:88vw;height:58vh;transform:translate(50%,-50%) rotate(3deg)}
       .opening-product:before{width:88%;filter:blur(22px)}
       .opening-product:after{bottom:4%;width:54%;height:4%;filter:blur(22px)}
-      .opening-product img{height:57vh;max-height:none;max-width:100%;filter:drop-shadow(18px 30px 25px rgba(0,0,0,.2));}
+      .opening-product img{height:57vh;max-height:none;max-width:100%;filter:drop-shadow(18px 30px 25px rgba(0,0,0,.2))}
       .opening-meta{left:24px;right:auto;bottom:27px;font-size:9px;gap:14px}
       .opening-meta span+span:before{margin-right:14px}
       .opening-scroll{bottom:27px;left:auto;right:24px;transform:none;font-size:8px}
+      .product-stage:before{left:50%;top:21%;height:52%;opacity:.35}
+      .product-aura{width:105vw;height:105vw;right:-3%;top:60%;filter:blur(10px)}
+      .product-floor{width:60vw;height:38px;right:20%;bottom:10%;filter:blur(24px)}
+      .product-image-stack{right:50%;top:59%;width:78vw;height:58vh;transform:translate(50%,-50%) rotateY(-4deg)}
+      .product-image{height:53vh;max-width:84%;filter:drop-shadow(13px 25px 20px rgba(0,0,0,.16)) contrast(1.02) saturate(.9)}
+      .detail-left{left:24px;right:auto;top:55%;transform:translateY(-150px)}
+      .detail-right{right:24px;top:65%;transform:none}
+      .era-caption{left:24px;right:auto;bottom:90px;font-size:7px}
     }
 
-    @media(min-width:851px){
-      .opening-copy{width:42vw}
-      .opening-product{right:3%;}
+    @media(min-width:851px){.opening-copy{width:42vw}.opening-product{right:3%}}
+
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
     }
   </style>
 </head>
 <body>
   <div class="site-progress"><span id="progress-bar"></span></div>
-  <header class="topbar">
-    <a class="brand" href="#top">OBJECT EVOLUTION</a>
-    <nav aria-label="主导航"><a href="#evolution">演化</a><a href="#timeline">时间线</a><a href="#collection">更多物品</a></nav>
-  </header>
+  <header class="topbar"><a class="brand" href="#top">OBJECT EVOLUTION</a><nav aria-label="主导航"><a href="#evolution">演化</a><a href="#timeline">时间线</a><a href="#collection">更多物品</a></nav></header>
   <main id="top">
-    <section class="opening">
-      <div class="opening-copy"><p class="eyebrow">OBJECT 01 / 06</p><h1>手机</h1><p class="opening-line">50 年，<br /><span>重新定义一件物品。</span></p></div>
-      <div class="opening-product" aria-hidden="true"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/DynaTAC8000X.jpg" alt="" /></div>
-      <div class="opening-meta"><span>1973</span><span>2026</span></div><div class="opening-scroll">向下滚动 <span>↓</span></div>
-    </section>
-
-    <section class="evolution" id="evolution" aria-label="手机演化">
-      <div class="evolution-sticky">
-        <div class="evolution-bg" id="evolution-bg"></div>
-        <div class="era-watermark" id="era-watermark">1973</div>
-        <div class="era-copy">
-          <div class="era-index" id="era-index">01</div><div class="era-year" id="era-year">1973</div>
-          <h2 id="era-title">电话第一次<br /><span>离开了墙。</span></h2><p id="era-description">它很重、很贵、很笨拙，但它第一次让电话可以跟着人走。</p>
-          <div class="era-stat"><strong id="era-stat">1.1 kg</strong><span id="era-stat-label">早期移动电话重量</span></div>
-        </div>
-        <div class="product-stage" id="product-stage" aria-hidden="true">
-          <div class="product-aura"></div><div class="product-floor"></div>
-          <div class="product-image-stack" id="product-stack">
-            <img class="product-image ghost ghost-a" id="ghost-a" src="https://commons.wikimedia.org/wiki/Special:FilePath/DynaTAC8000X.jpg" alt="" />
-            <img class="product-image ghost ghost-b" id="ghost-b" src="https://commons.wikimedia.org/wiki/Special:FilePath/DynaTAC8000X.jpg" alt="" />
-            <img class="product-image active" id="product-image" src="https://commons.wikimedia.org/wiki/Special:FilePath/DynaTAC8000X.jpg" alt="" />
-          </div>
-          <div class="product-detail detail-left" id="detail-left">MOBILE / 01G</div><div class="product-detail detail-right" id="detail-right">ANALOG / 1G</div>
-          <div class="explode-lines" id="explode-lines"><i></i><i></i><i></i></div>
-        </div>
-        <div class="era-caption" id="era-caption">DYNATAC · FIRST GENERATION MOBILE PHONE</div><div class="era-progress"><span id="era-progress"></span></div><div class="era-dots" id="era-dots"></div>
-        <div class="scene-hint">SCROLL TO EVOLVE</div>
-      </div>
-    </section>
-
+    <section class="opening"><div class="opening-copy"><p class="eyebrow">OBJECT 01 / 06</p><h1>手机</h1><p class="opening-line">50 年，<br /><span>重新定义一件物品。</span></p></div><div class="opening-product" aria-hidden="true"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/DynaTAC8000X.jpg" alt="" /></div><div class="opening-meta"><span>1973</span><span>2026</span></div><div class="opening-scroll">向下滚动 <span>↓</span></div></section>
+    <section class="evolution" id="evolution" aria-label="手机演化"><div class="evolution-sticky"><div class="evolution-bg" id="evolution-bg"></div><div class="era-watermark" id="era-watermark">1973</div><div class="era-copy"><div class="era-index" id="era-index">01</div><div class="era-year" id="era-year">1973</div><h2 id="era-title">电话第一次<br /><span>离开了墙。</span></h2><p id="era-description">它很重、很贵、很笨拙，但它第一次让电话可以跟着人走。</p><div class="era-stat"><strong id="era-stat">1.1 kg</strong><span id="era-stat-label">早期移动电话重量</span></div></div><div class="product-stage" id="product-stage" aria-hidden="true"><div class="product-aura"></div><div class="product-floor"></div><div class="product-image-stack" id="product-stack"><img class="product-image ghost ghost-a" id="ghost-a" src="https://commons.wikimedia.org/wiki/Special:FilePath/DynaTAC8000X.jpg" alt="" /><img class="product-image ghost ghost-b" id="ghost-b" src="https://commons.wikimedia.org/wiki/Special:FilePath/DynaTAC8000X.jpg" alt="" /><img class="product-image active" id="product-image" src="https://commons.wikimedia.org/wiki/Special:FilePath/DynaTAC8000X.jpg" alt="" /></div><div class="product-detail detail-left" id="detail-left">MOBILE / 01G</div><div class="product-detail detail-right" id="detail-right">ANALOG / 1G</div><div class="explode-lines" id="explode-lines"><i></i><i></i><i></i></div></div><div class="era-caption" id="era-caption">DYNATAC · FIRST GENERATION MOBILE PHONE</div><div class="era-progress"><span id="era-progress"></span></div><div class="era-dots" id="era-dots"></div><div class="scene-hint">SCROLL TO EVOLVE</div></div></section>
     <section class="statement statement-white"><div class="statement-number">01</div><p class="eyebrow">THE FIRST SHIFT</p><h2>它不是更小了。<br /><span>它开始属于人。</span></h2><p class="statement-note">移动电话第一次把通信从一个地点，变成了一种随身携带的能力。</p></section>
     <section class="statement statement-black"><div class="statement-number">02</div><p class="eyebrow">THE SCREEN</p><h2>然后，<br /><span>屏幕变成了入口。</span></h2><p class="statement-note">触控让手机从“打电话的东西”变成“进入数字世界的东西”。</p></section>
-    <section class="statement statement-ai">
-      <div class="ai-orbit"></div><div class="ai-grid"></div><div class="ai-product"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Pixel_10_front_%28Obsidian%29.svg" alt="Pixel 10 front reference" /></div>
-      <div class="ai-copy"><p class="eyebrow">2026 / THE NEXT INTERFACE</p><h2>下一步，<br /><span>不是更快。</span><br />是更懂。</h2><p>手机正在从响应指令的工具，走向理解上下文、视觉、声音与意图的个人计算入口。</p><div class="ai-word">INTENT</div></div>
-      <div class="ai-footer">VOICE · VISION · CONTEXT · ACTION</div>
-    </section>
+    <section class="statement statement-ai"><div class="ai-orbit"></div><div class="ai-grid"></div><div class="ai-product"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Pixel_10_front_%28Obsidian%29.svg" alt="Pixel 10 front reference" /></div><div class="ai-copy"><p class="eyebrow">2026 / THE NEXT INTERFACE</p><h2>下一步，<br /><span>不是更快。</span><br />是更懂。</h2><p>手机正在从响应指令的工具，走向理解上下文、视觉、声音与意图的个人计算入口。</p><div class="ai-word">INTENT</div></div><div class="ai-footer">VOICE · VISION · CONTEXT · ACTION</div></section>
     <section class="timeline-section" id="timeline"><div class="timeline-top"><p class="eyebrow">THE TIMELINE</p><h2>七次重新定义。</h2></div><div class="timeline-list" id="timeline-list"></div></section>
     <section class="collection-section" id="collection"><p class="eyebrow">NEXT OBJECTS</p><h2>下一件，<br />会是什么？</h2><div class="collection-grid" id="collection-grid"></div></section>
     <footer class="footer"><span>OBJECT EVOLUTION</span><span>FROM OBJECT TO INTERFACE</span></footer>
-  </main>
-  <script src="./app.js" defer></script>
+  </main><script src="./app.js" defer></script>
 </body>
 </html>
