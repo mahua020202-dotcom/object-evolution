@@ -1,6 +1,6 @@
 const ERAS=[
-{year:"1973",title:"电话第一次<br /><span>离开了墙。</span>",description:"它很重、很贵、很笨拙，但它第一次让电话可以跟着人走。",stat:"1.1 kg",statLabel:"早期移动电话重量",image:"https://commons.wikimedia.org/wiki/Special:FilePath/DynaTAC8000X.jpg",caption:"DYNATAC · FIRST GENERATION MOBILE PHONE",left:"MOBILE / 01G",right:"ANALOG / 1G"},
-{year:"1983",title:"它开始<br /><span>真正进入生活。</span>",description:"商业化蜂窝网络出现，移动电话从实验设备变成了可以购买、可以携带的个人设备。",stat:"800 g",statLabel:"商业化移动电话重量",image:"https://commons.wikimedia.org/wiki/Special:FilePath/DynaTAC8000X.jpg",caption:"DYNATAC 8000X · THE BRICK BECOMES MOBILE",left:"CELLULAR / 1G",right:"PORTABLE"},
+{year:"1973",title:"电话第一次<br /><span>离开了墙。</span>",description:"Martin Cooper 的移动电话原型第一次证明，电话可以真正跟着人走。",stat:"1.1 kg",statLabel:"DynaTAC 原型约重",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Motorola_DynaTAC.jpg",caption:"1973 DYNATAC PROTOTYPE · THE PHONE LEAVES THE WALL",left:"PROTOTYPE / 1G",right:"1973"},
+{year:"1983",title:"它开始<br /><span>真正进入生活。</span>",description:"DynaTAC 8000X 获得商业认证，移动电话从实验设备走向真正可以购买和携带的个人设备。",stat:"800 g",statLabel:"DynaTAC 8000X 约重",image:"https://commons.wikimedia.org/wiki/Special:FilePath/DynaTAC8000X.jpg",caption:"DYNATAC 8000X · THE BRICK BECOMES MOBILE",left:"CELLULAR / 1G",right:"PORTABLE"},
 {year:"1994",title:"文字，<br /><span>进入了手机。</span>",description:"IBM Simon 把电话、触控、日程与信息放进同一个设备，手机开始靠近“电脑”。",stat:"TOUCH",statLabel:"手机第一次接近智能终端",image:"https://commons.wikimedia.org/wiki/Special:FilePath/IBM_Simon_Personal_Communicator.png",caption:"IBM SIMON · PHONE MEETS COMPUTER",left:"TOUCH / PDA",right:"1994"},
 {year:"2000",title:"手机开始<br /><span>拥有自己的世界。</span>",description:"彩屏、短信、游戏、音乐与相机，让手机从通信工具变成个人娱乐中心。",stat:"COLOR",statLabel:"屏幕开始表达更多",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Nokia_3310_grey_front.jpg",caption:"NOKIA 3310 · THE PHONE BECOMES CULTURE",left:"SMS / GAME",right:"PERSONAL"},
 {year:"2007",title:"屏幕，<br /><span>变成了入口。</span>",description:"触控、网页、地图、相机与应用，把手机推向掌上电脑时代。",stat:"MULTI-TOUCH",statLabel:"交互方式发生变化",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Apple-iPhone-003.jpg",caption:"IPHONE · THE SCREEN BECOMES THE INTERFACE",left:"TOUCH / WEB",right:"2007"},
@@ -24,9 +24,6 @@ function setEra(index,local,global){
   const changing=index<ERAS.length-1&&local>.68;
   const current=changing?to:from,currentIndex=changing?index+1:index;
   eraIndex.textContent=String(currentIndex+1).padStart(2,"0");eraYear.textContent=current.year;eraWatermark.textContent=current.year;eraTitle.innerHTML=current.title;eraDescription.textContent=current.description;eraStat.textContent=current.stat;eraStatLabel.textContent=current.statLabel;eraCaption.textContent=current.caption;detailLeft.textContent=current.left;detailRight.textContent=current.right;
-
-  // Keep the outgoing exhibit in the hero layer while the next one grows underneath it.
-  // The source swap only happens after the crossfade has completed, eliminating the hard cut.
   const completed=transition>=.98||index===ERAS.length-1;
   if(productImage.dataset.src!==from.image&&productImage.dataset.src!==to.image) productImage.dataset.src=from.image;
   if(index===ERAS.length-1){
@@ -39,21 +36,17 @@ function setEra(index,local,global){
     if(productImage.dataset.src!==from.image){productImage.dataset.src=from.image;productImage.src=from.image}
     productImage.style.opacity=String(1-transition);
   }
-
   const spin=Math.sin(global*Math.PI*2.35)*8;
   const localSpin=lerp(-5,5,local);
   const scale=lerp(.9,1.06,Math.sin(local*Math.PI)*.16+.5);
   const y=Math.sin(global*Math.PI*2)*-18;
   productImage.style.transform=`translate3d(0,${y}px,0) rotateX(${lerp(2,-3,local)}deg) rotateY(${spin}deg) rotateZ(${localSpin}deg) scale(${scale})`;
-  productImage.style.filter=`drop-shadow(${lerp(24,38,scale-0.9)*1}px ${lerp(38,58,scale-0.9)}px ${lerp(26,44,scale-0.9)}px rgba(0,0,0,.20))`;
-
+  productImage.style.filter=`drop-shadow(${lerp(24,38,scale-0.9)}px ${lerp(38,58,scale-0.9)}px ${lerp(26,44,scale-0.9)}px rgba(0,0,0,.20))`;
   ghostA.src=from.image;ghostB.src=to.image;
-  ghostA.style.opacity=transition*.26;
-  ghostB.style.opacity=transition*.95;
+  ghostA.style.opacity=transition*.26;ghostB.style.opacity=transition*.95;
   ghostA.style.transform=`translate3d(${transition*-105}px,${transition*-38}px,0) rotateY(${transition*-20}deg) rotateZ(${transition*-8}deg) scale(${1+transition*.13})`;
   ghostB.style.transform=`translate3d(${transition*105}px,${transition*46}px,0) rotateY(${transition*20}deg) rotateZ(${transition*8}deg) scale(${1+transition*.18})`;
   if(completed){ghostA.style.opacity="0";ghostB.style.opacity="0"}
-
   explodeLines.style.opacity=transition>.05&&transition<.98?Math.min(transition*2.2,1)*.72:0;
   explodeLines.style.transform=`translateY(-50%) rotate(${global*42}deg) scale(${.7+transition*.45})`;
   stack.style.transform=`translateY(-50%) scale(${1+Math.sin(local*Math.PI)*.035})`;
