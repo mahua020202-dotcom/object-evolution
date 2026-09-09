@@ -6,6 +6,43 @@
   <meta name="description" content="OBJECT EVOLUTION · 手机，从移动电话到 AI 计算入口。" />
   <title>手机 · Object Evolution</title>
   <link rel="stylesheet" href="./styles.css" />
+  <style>
+    /* Hero polish: make the first screen feel like a product launch, not a poster. */
+    .opening{background:#f7f7f5;display:block;padding:0;isolation:isolate}
+    .opening:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.46),transparent 32%,rgba(0,0,0,.025));pointer-events:none}
+    .opening-copy{position:absolute;z-index:5;left:max(30px,calc((100vw - 1240px)/2));top:50%;transform:translateY(-54%);max-width:650px}
+    .opening-copy .eyebrow{margin-bottom:28px;color:#a2a2a0}
+    .opening h1{margin:0 0 34px;font-size:clamp(92px,13vw,190px);line-height:.82;letter-spacing:-.1em}
+    .opening-line{font-size:clamp(28px,3.7vw,54px);line-height:1.04;letter-spacing:-.055em}
+    .opening-line span{display:inline-block;margin-top:7px;color:#a4a4a6}
+    .opening-product{right:4%;top:53%;width:min(47vw,650px);height:86vh;transform:translateY(-50%) rotate(4deg);}
+    .opening-product:before{width:82%;background:radial-gradient(circle,#fff 0,rgba(220,222,226,.7) 35%,transparent 70%);filter:blur(24px)}
+    .opening-product:after{content:"";position:absolute;z-index:1;bottom:8%;width:46%;height:5%;border-radius:50%;background:rgba(0,0,0,.16);filter:blur(26px);transform:rotateX(68deg)}
+    .opening-product img{height:min(82vh,840px);filter:drop-shadow(28px 46px 36px rgba(0,0,0,.22));mix-blend-mode:multiply}
+    .opening-meta{left:max(30px,calc((100vw - 1240px)/2));right:auto;bottom:34px}
+    .opening-scroll{bottom:30px;opacity:.75}
+
+    @media(max-width:850px){
+      .opening{min-height:100svh;padding:0;background:#f7f7f5}
+      .opening-copy{left:24px;right:24px;top:15svh;transform:none;text-align:left;max-width:none}
+      .opening-copy .eyebrow{margin-bottom:24px;font-size:9px}
+      .opening h1{margin-bottom:24px;font-size:clamp(78px,23vw,112px);line-height:.8;letter-spacing:-.105em}
+      .opening-line{font-size:clamp(27px,8.2vw,38px);line-height:1.02;letter-spacing:-.06em}
+      .opening-line span{margin-top:5px;color:#9a9a9e}
+      .opening-product{right:50%;top:65%;width:88vw;height:58vh;transform:translate(50%,-50%) rotate(3deg);opacity:1}
+      .opening-product:before{width:88%;filter:blur(22px)}
+      .opening-product:after{bottom:4%;width:54%;height:4%;filter:blur(22px)}
+      .opening-product img{height:57vh;max-height:none;max-width:100%;filter:drop-shadow(18px 30px 25px rgba(0,0,0,.2));}
+      .opening-meta{left:24px;right:auto;bottom:27px;font-size:9px;gap:14px}
+      .opening-meta span+span:before{margin-right:14px}
+      .opening-scroll{bottom:27px;left:auto;right:24px;transform:none;font-size:8px}
+    }
+
+    @media(min-width:851px){
+      .opening-copy{width:42vw}
+      .opening-product{right:3%;}
+    }
+  </style>
 </head>
 <body>
   <div class="site-progress"><span id="progress-bar"></span></div>
