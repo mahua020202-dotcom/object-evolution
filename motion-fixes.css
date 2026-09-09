@@ -35,3 +35,22 @@
   .statement-ai .ai-copy{left:24px;right:24px;width:auto;padding-top:12vh}.statement-ai .ai-copy h2{font-size:clamp(48px,14vw,78px);line-height:.95}.statement-ai .ai-product{z-index:10}.statement-ai:after{left:24px;right:24px;transform:none;white-space:normal;text-align:left;letter-spacing:.16em;line-height:1.6}.evolution.screen-transition .evolution-sticky:after{left:24px;width:calc(100vw - 48px);bottom:8%;white-space:normal;letter-spacing:.2em}.evolution.screen-transition .evolution-sticky:before{left:50%;top:57%;width:52vw;height:68vw}.product-stage[data-era="2026"]:after{right:24px;bottom:18%;font-size:7px;letter-spacing:.12em}.product-image.ghost{mask-image:radial-gradient(ellipse 44% 52% at 50% 50%,#000 0 62%,transparent 90%);-webkit-mask-image:radial-gradient(ellipse 44% 52% at 50% 50%,#000 0 62%,transparent 90%)}.product-stage[data-era="1973"]:after,.product-stage[data-era="1983"]:after,.product-stage[data-era="1994"]:after,.product-stage[data-era="2000"]:after,.product-stage[data-era="2015"]:after{right:-5%;top:58%;width:105vw;height:90vw}.explode-lines{opacity:.4!important}
 }
 @media(prefers-reduced-motion:reduce){.evolution.screen-transition .evolution-sticky:after{transform:translate(-50%,0);opacity:1}}
+
+/* Structural timeline fallback: stop relying on viewport media queries alone. The actual rendered section width decides when the exhibit stacks. */
+.timeline-section,.timeline-list,.timeline-item,.timeline-item>div{box-sizing:border-box;min-width:0!important}
+.timeline-list{width:min(1100px,calc(100vw - 48px))!important;max-width:1100px!important}
+.timeline-item{grid-template-columns:clamp(72px,10vw,110px) minmax(0,1fr)!important;width:100%!important;max-width:100%!important}
+.timeline-item .timeline-index{display:none!important}
+.timeline-item>div{width:100%!important;min-width:0!important;max-width:100%!important}
+.timeline-item h3,.timeline-item p{max-width:100%!important}
+.timeline-item h3,.timeline-item p{white-space:normal!important;overflow-wrap:anywhere!important;word-break:break-word!important}
+
+/* ResizeObserver adds .timeline-compact from the real section width, so browser zoom, embeds, split panes and unusual viewport reporting cannot leave a desktop grid trapped in a tiny canvas. */
+.timeline-section.timeline-compact{padding-left:16px!important;padding-right:16px!important;overflow:hidden!important}
+.timeline-section.timeline-compact .timeline-list{width:100%!important;max-width:none!important;margin-top:42px!important}
+.timeline-section.timeline-compact .timeline-list:before{display:block!important;content:""!important;position:absolute!important;left:0!important;top:0!important;width:1px!important;height:100%!important;background:#111!important}
+.timeline-section.timeline-compact .timeline-item{grid-template-columns:minmax(0,1fr)!important;gap:7px!important;padding:20px 0 20px 16px!important;align-items:start!important}
+.timeline-section.timeline-compact .timeline-item strong{font-size:18px!important;line-height:1!important}
+.timeline-section.timeline-compact .timeline-item h3{font-size:18px!important;line-height:1.28!important;margin:0 0 6px!important}
+.timeline-section.timeline-compact .timeline-item p{font-size:12px!important;line-height:1.55!important}
+.timeline-section.timeline-compact .timeline-item em{display:none!important}
