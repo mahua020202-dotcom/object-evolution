@@ -13,7 +13,7 @@
 .evolution.screen-transition .era-title,.evolution.screen-transition #era-title{color:#fff!important}
 .evolution.screen-transition .era-watermark{color:#fff;opacity:.05!important}
 
-/* AI finale: keep the narrative copy above every decorative layer. */
+/* AI finale: the narrative stays readable while the phone and field slowly converge. */
 .statement-ai{position:relative;isolation:isolate;overflow:hidden}
 .statement-ai .ai-grid,.statement-ai .ai-orbit,.statement-ai .ai-product{pointer-events:none}
 .statement-ai .ai-copy{position:absolute;z-index:30;left:max(30px,calc((100vw - 1240px)/2));top:0;margin-left:0;padding-top:18vh;width:min(570px,48vw);pointer-events:none}
@@ -22,8 +22,13 @@
 .statement-ai .ai-copy h2 span{color:#a9b2ff!important}
 .statement-ai .ai-copy .eyebrow{color:rgba(255,255,255,.56)!important}
 .statement-ai .ai-copy .statement-note{color:rgba(255,255,255,.62)!important}
-.statement-ai .ai-product{z-index:10}
+.statement-ai .ai-product{z-index:10;transform:translateY(calc(-50% - (var(--ai-progress,0)*14px))) rotate(calc(7deg - var(--ai-progress,0)*5deg)) scale(calc(.94 + var(--ai-progress,0)*.06))}
+.statement-ai .ai-orbit{z-index:4;transform:translate(-50%,-50%) scale(calc(.92 + var(--ai-progress,0)*.12));opacity:calc(.62 + var(--ai-progress,0)*.32)}
+.statement-ai .ai-grid{opacity:calc(.28 + var(--ai-progress,0)*.28)}
 .statement-ai .ai-word{position:relative;z-index:32;color:#fff!important}
+.statement-ai .ai-word{letter-spacing:-.08em;text-shadow:0 10px 55px rgba(110,120,255,.24)}
+.statement-ai.ai-focus .ai-word{transform:translateY(0) scale(1.025)!important}
+.statement-ai.ai-intent .ai-word{color:#fff!important;text-shadow:0 0 70px rgba(145,150,255,.38)}
 .statement-ai:after{content:"VOICE  ·  VISION  ·  CONTEXT  ·  INTENT";position:absolute;z-index:25;left:50%;bottom:7%;transform:translateX(-50%);font:600 9px/1 Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;letter-spacing:.28em;color:rgba(255,255,255,.34);white-space:nowrap;pointer-events:none}
 
 @media(max-width:850px){
