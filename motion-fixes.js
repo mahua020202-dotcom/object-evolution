@@ -16,7 +16,6 @@
     const idx=Math.min(Math.floor(pos),5);
     const local=pos-idx;
 
-    /* Keep the generational ghosts present, but make them read as traces rather than competing products. */
     const transition=idx<6?clamp((local-.38)/.5):0;
     const morph=clamp((transition-.08)/.84);
     const spread=18+Math.sin(morph*Math.PI)*12;
@@ -27,14 +26,12 @@
     ghostA.style.filter='blur(1px) grayscale(.3)';
     ghostB.style.filter='blur(.2px) grayscale(.05)';
 
-    /* 2000 → 2007: one continuous handoff from physical object to glowing interface. */
     const screen=idx===3&&local>.38&&local<1;
     const screenProgress=screen?clamp((local-.38)/.58):0;
     evolution.classList.toggle('screen-transition',screen);
     evolution.style.setProperty('--screen-progress',screenProgress.toFixed(3));
     stage.dataset.transition=screen?'2000-2007':'';
 
-    /* Give the AI finale its own scroll phase so the word, phone, and field converge together. */
     if(ai){
       const ar=ai.getBoundingClientRect();
       const ap=clamp((innerHeight-ar.top)/(innerHeight+Math.max(ai.offsetHeight*.42,1)));
