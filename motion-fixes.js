@@ -4,8 +4,24 @@
   const ghostB=document.querySelector('.ghost-b');
   const stage=document.querySelector('.product-stage');
   const ai=document.querySelector('.statement-ai');
-  if(!evolution||!ghostA||!ghostB||!stage)return;
+  const timeline=document.querySelector('.timeline-section');
   const clamp=(v,min=0,max=1)=>Math.min(Math.max(v,min),max);
+
+  if(timeline){
+    const syncTimeline=()=>{
+      const width=timeline.getBoundingClientRect().width;
+      timeline.classList.toggle('timeline-compact',width<720);
+    };
+    if('ResizeObserver' in window){
+      const observer=new ResizeObserver(syncTimeline);
+      observer.observe(timeline);
+    }
+    addEventListener('resize',syncTimeline,{passive:true});
+    addEventListener('load',syncTimeline,{once:true});
+    syncTimeline();
+  }
+
+  if(!evolution||!ghostA||!ghostB||!stage)return;
   const years=['1973','1983','1994','2000','2007','2015','2026'];
   function sync(){
     const r=evolution.getBoundingClientRect();
