@@ -29,8 +29,12 @@ const evolutionScreenLabel = document.getElementById("evolution-screen-label");
 const evolutionScreenDetail = document.getElementById("evolution-screen-detail");
 
 function renderTimeline() {
-  timelineList.innerHTML = ERAS.map((era, index) => `<article class="timeline-item" data-target="${Math.min(index, 5)}"><strong>${era.year}</strong><div><h3>${era.title.replace(/<[^>]+>/g, "")}</h3><p>${era.description}</p></div><em>0${index + 1} / 07</em></article>`).join("");
-  timelineList.querySelectorAll("[data-target]").forEach((item) => item.addEventListener("click", () => evolutionScene?.scrollIntoView({ behavior: "smooth" })));
+  timelineList.innerHTML = ERAS.map((era, index) => `<article class="timeline-item" data-target="${index}"><strong>${era.year}</strong><div><h3>${era.title.replace(/<[^>]+>/g, "")}</h3><p>${era.description}</p></div><em>0${index + 1} / 07</em></article>`).join("");
+  timelineList.querySelectorAll("[data-target]").forEach((item) => item.addEventListener("click", () => {
+    const index = Number(item.dataset.target);
+    const target = evolutionScene.offsetTop + (evolutionScene.offsetHeight - window.innerHeight) * (index / (ERAS.length - 1));
+    window.scrollTo({ top: target, behavior: "smooth" });
+  }));
 }
 
 function renderCollections() {
@@ -50,13 +54,12 @@ function updateEvolution() {
   const local = position - index;
   const from = ERAS[Math.max(index, 0)];
   const to = ERAS[Math.min(index + 1, ERAS.length - 1)];
-  const t = local;
-  const width = interpolate(from.width, to.width, t);
-  const height = interpolate(from.height, to.height, t);
-  const radius = interpolate(from.radius, to.radius, t);
-  const angle = interpolate(from.angle, to.angle, t);
-  const rotate = interpolate(from.rotate, to.rotate, t);
-  const buttonOpacity = interpolate(from.buttons, to.buttons, t);
+  const width = interpolate(from.width, to.width, local);
+  const height = interpolate(from.height, to.height, local);
+  const radius = interpolate(from.radius, to.radius, local);
+  const angle = interpolate(from.angle, to.angle, local);
+  const rotate = interpolate(from.rotate, to.rotate, local);
+  const buttonOpacity = interpolate(from.buttons, to.buttons, local);
   evolutionPhone.style.width = `${width}px`;
   evolutionPhone.style.height = `${height}px`;
   evolutionPhone.style.borderRadius = `${radius}px`;
@@ -65,12 +68,12 @@ function updateEvolution() {
   evolutionButtons.style.transform = `scale(${interpolate(1, .72, 1 - buttonOpacity)})`;
   evolutionProgress.style.width = `${progress * 100}%`;
   evolutionYear.textContent = progress < 1 ? from.year : ERAS.at(-1).year;
-  evolutionTitle.innerHTML = t > .55 ? to.title : from.title;
-  evolutionDescription.textContent = t > .55 ? to.description : from.description;
-  evolutionMetric.textContent = t > .55 ? to.metric : from.metric;
-  evolutionMetricLabel.textContent = t > .55 ? to.metricLabel : from.metricLabel;
-  evolutionScreenLabel.textContent = t > .55 ? to.screen : from.screen;
-  evolutionScreenDetail.textContent = t > .55 ? to.detail : from.detail;
+  evolutionTitle.innerHTML = local > .55 ? to.title : from.title;
+  evolutionDescription.textContent = local > .55 ? to.description : from.description;
+  evolutionMetric.textContent = local > .55 ? to.metric : from.metric;
+  evolutionMetricLabel.textContent = local > .55 ? to.metricLabel : from.metricLabel;
+  evolutionScreenLabel.textContent = local > .55 ? to.screen : from.screen;
+  evolutionScreenDetail.textContent = local > .55 ? to.detail : from.detail;
   evolutionScreen.style.background = progress > .83 ? "radial-gradient(circle at 50% 18%,#343f70,#08090b 62%)" : progress > .55 ? "radial-gradient(circle at 50% 18%,#26385c,#08090b 62%)" : "radial-gradient(circle at 50% 18%,#27344b,#08090b 62%)";
   evolutionBackdrop.style.background = progress > .83 ? "radial-gradient(circle at 68% 50%,rgba(91,108,255,.3),transparent 30%),radial-gradient(circle at 20% 60%,rgba(255,255,255,.06),transparent 28%)" : "radial-gradient(circle at 68% 50%,rgba(70,78,100,.24),transparent 30%),radial-gradient(circle at 20% 60%,rgba(255,255,255,.06),transparent 28%)";
 }
