@@ -12,6 +12,7 @@
       <a class="brand" href="#top">OBJECT EVOLUTION</a>
       <nav aria-label="主导航">
         <a href="#story">手机</a>
+        <a href="#evolution">演化</a>
         <a href="#timeline">时间线</a>
         <a href="#collection">更多物品</a>
       </nav>
@@ -28,86 +29,68 @@
         <div class="hero-device-wrap" aria-hidden="true">
           <div class="device-glow"></div>
           <div class="phone phone-hero" id="hero-phone">
-            <div class="phone-screen">
-              <span class="phone-status">9:41</span>
-              <span class="phone-signal">● ● ●</span>
-              <div class="phone-screen-mark">PHONE</div>
-            </div>
+            <div class="phone-screen"><span class="phone-status">9:41</span><span class="phone-signal">● ● ●</span><div class="phone-screen-mark">PHONE</div></div>
             <div class="phone-side"></div>
           </div>
         </div>
         <div class="scroll-cue"><span></span>向下滚动</div>
       </section>
 
-      <section class="story-section story-dark" data-era="0">
-        <div class="story-inner">
-          <p class="kicker">1973</p>
-          <h2>电话第一次<br /><span>离开了墙。</span></h2>
-          <p>早期移动电话笨重、昂贵，而且续航短。但它完成了一件看似简单的事：让人可以在移动中打电话。</p>
-          <div class="metric-row"><strong>1.1 kg</strong><span>早期移动电话的重量</span></div>
+      <section class="evolution-scene" id="evolution" aria-label="手机演化动画">
+        <div class="evolution-sticky">
+          <div class="evolution-backdrop"></div>
+          <div class="evolution-copy">
+            <p class="kicker" id="evolution-year">1973</p>
+            <h2 id="evolution-title">电话第一次<br /><span>离开了墙。</span></h2>
+            <p id="evolution-description">它很重、很贵、很笨拙，但它第一次让电话可以跟着人走。</p>
+            <div class="evolution-metric"><strong id="evolution-metric">1.1 kg</strong><span id="evolution-metric-label">早期移动电话重量</span></div>
+          </div>
+          <div class="evolution-product" aria-hidden="true">
+            <div class="evolution-shadow"></div>
+            <div class="evolution-phone" id="evolution-phone">
+              <div class="evolution-screen"><span id="evolution-screen-label">DYNATAC</span><small id="evolution-screen-detail">1973</small></div>
+              <div class="evolution-notch"></div>
+              <div class="evolution-buttons"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="evolution-camera"></div>
+            </div>
+          </div>
+          <div class="evolution-progress"><span id="evolution-progress"></span></div>
+          <div class="evolution-years" aria-hidden="true"><span>1973</span><span>1983</span><span>1994</span><span>2000</span><span>2007</span><span>2015</span><span>2026</span></div>
         </div>
+      </section>
+
+      <section class="story-section story-dark" data-era="0">
+        <div class="story-inner"><p class="kicker">1973</p><h2>电话第一次<br /><span>离开了墙。</span></h2><p>早期移动电话笨重、昂贵，而且续航短。但它完成了一件看似简单的事：让人可以在移动中打电话。</p><div class="metric-row"><strong>1.1 kg</strong><span>早期移动电话的重量</span></div></div>
         <div class="stage-device"><div class="phone phone-brick"><div class="brick-screen">MOTOROLA<br />DYNATAC</div><div class="brick-keys">● ● ●<br />● ● ●<br />● ● ●</div></div></div>
       </section>
 
       <section class="story-section story-light" data-era="1">
-        <div class="story-inner">
-          <p class="kicker">1983 · 1994</p>
-          <h2>它开始<br /><span>变得像一部手机。</span></h2>
-          <p>蜂窝网络、数字通信和更小的芯片，让移动电话从昂贵的实验逐渐成为真正的个人设备。</p>
-          <div class="split-metrics"><div><strong>SMS</strong><span>文字开始进入手机</span></div><div><strong>Digital</strong><span>数字通信时代开启</span></div></div>
-        </div>
+        <div class="story-inner"><p class="kicker">1983 · 1994</p><h2>它开始<br /><span>变得像一部手机。</span></h2><p>蜂窝网络、数字通信和更小的芯片，让移动电话从昂贵的实验逐渐成为真正的个人设备。</p><div class="split-metrics"><div><strong>SMS</strong><span>文字开始进入手机</span></div><div><strong>Digital</strong><span>数字通信时代开启</span></div></div></div>
         <div class="stage-device stage-pair"><div class="phone phone-compact"><div class="compact-screen">HELLO</div><div class="compact-keys">1 2 3<br />4 5 6<br />7 8 9</div></div><div class="phone phone-slab"><div class="slab-screen">1994</div></div></div>
       </section>
 
       <section class="story-section story-light" data-era="2">
-        <div class="story-inner center-copy">
-          <p class="kicker">2000</p>
-          <h2>手机开始<br /><span>拥有自己的世界。</span></h2>
-          <p>彩屏、游戏、音乐、相机。手机不再只是通信工具，功能开始围绕它聚集。</p>
-        </div>
+        <div class="story-inner center-copy"><p class="kicker">2000</p><h2>手机开始<br /><span>拥有自己的世界。</span></h2><p>彩屏、游戏、音乐、相机。手机不再只是通信工具，功能开始围绕它聚集。</p></div>
         <div class="feature-orbit" aria-hidden="true"><span>PHOTO</span><span>MUSIC</span><span>GAME</span><span>MESSAGE</span></div>
       </section>
 
       <section class="story-section story-black" data-era="3">
-        <div class="story-inner center-copy">
-          <p class="kicker">2007</p>
-          <h2>然后，<br /><span>屏幕变成了入口。</span></h2>
-          <p>触控、网页、地图、相机、应用。手机开始成为一台真正意义上的掌上电脑。</p>
-        </div>
+        <div class="story-inner center-copy"><p class="kicker">2007</p><h2>然后，<br /><span>屏幕变成了入口。</span></h2><p>触控、网页、地图、相机、应用。手机开始成为一台真正意义上的掌上电脑。</p></div>
         <div class="phone phone-smart" aria-hidden="true"><div class="smart-screen"><span>10:09</span><div class="app-grid"><i>◉</i><i>◌</i><i>⌁</i><i>◈</i><i>●</i><i>✦</i></div></div></div>
       </section>
 
       <section class="story-section story-light" data-era="4">
-        <div class="story-inner">
-          <p class="kicker">2015</p>
-          <h2>更多屏幕，<br /><span>更少边界。</span></h2>
-          <p>显示、摄影、生物识别和移动支付逐渐融入同一个薄薄的矩形里。手机开始承担越来越多生活功能。</p>
-        </div>
+        <div class="story-inner"><p class="kicker">2015</p><h2>更多屏幕，<br /><span>更少边界。</span></h2><p>显示、摄影、生物识别和移动支付逐渐融入同一个薄薄的矩形里。手机开始承担越来越多生活功能。</p></div>
         <div class="fullscreen-phone" aria-hidden="true"><div class="fullscreen-screen"><span>FULL SCREEN</span></div></div>
       </section>
 
       <section class="story-section story-ai" data-era="5">
-        <div class="ai-glow"></div>
-        <div class="story-inner center-copy">
-          <p class="kicker">2026</p>
-          <h2>下一步，<br /><span>是理解。</span></h2>
-          <p>手机正在从响应指令的工具，变成更主动的个人计算入口。语音、视觉、文字与端侧 AI 开始融合。</p>
-          <div class="ai-word">INTENT</div>
-        </div>
+        <div class="ai-glow"></div><div class="story-inner center-copy"><p class="kicker">2026</p><h2>下一步，<br /><span>是理解。</span></h2><p>手机正在从响应指令的工具，变成更主动的个人计算入口。语音、视觉、文字与端侧 AI 开始融合。</p><div class="ai-word">INTENT</div></div>
       </section>
 
-      <section class="timeline-section" id="timeline">
-        <div class="timeline-heading"><p class="kicker">THE TIMELINE</p><h2>一件物品，<br />六次重新定义。</h2></div>
-        <div class="timeline-list" id="timeline-list"></div>
-      </section>
-
-      <section class="collection-section" id="collection">
-        <p class="kicker">NEXT COLLECTION</p>
-        <h2>接下来，<br />我们继续看。</h2>
-        <div class="collection-grid" id="collection-grid"></div>
-      </section>
+      <section class="timeline-section" id="timeline"><div class="timeline-heading"><p class="kicker">THE TIMELINE</p><h2>一件物品，<br />六次重新定义。</h2></div><div class="timeline-list" id="timeline-list"></div></section>
+      <section class="collection-section" id="collection"><p class="kicker">NEXT COLLECTION</p><h2>接下来，<br />我们继续看。</h2><div class="collection-grid" id="collection-grid"></div></section>
     </main>
-
     <div class="progress"><span id="progress-bar"></span></div>
     <script src="./app.js" defer></script>
   </body>
