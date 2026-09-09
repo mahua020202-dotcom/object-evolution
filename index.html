@@ -34,6 +34,42 @@
     .detail-right{right:8%}
     .era-caption{font-size:8px;letter-spacing:.2em}
 
+    /* Statements: give the typography more air, then let each line arrive separately. */
+    .statement{padding-top:150px;padding-bottom:150px}
+    .statement h2{line-height:1.02}
+    .statement .eyebrow,.statement h2,.statement-note{opacity:0;transform:translateY(34px);transition:opacity .9s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+    .statement .eyebrow{transform:translateY(18px);transition-delay:.05s}
+    .statement h2{transition-delay:.16s}
+    .statement-note{transition-delay:.3s}
+    .statement.is-visible .eyebrow,.statement.is-visible h2,.statement.is-visible .statement-note{opacity:1;transform:none}
+    .statement h2 span{display:inline-block;transform:translateY(.08em);transition:color .9s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+    .statement.is-visible h2 span{transform:none}
+    .statement-white.is-visible h2 span{color:#111}
+    .statement-black.is-visible h2 span{color:#77777c}
+
+    /* The AI finale gets a slow breathing field instead of constant motion. */
+    .statement-ai .ai-orbit{animation:ai-breathe 7s ease-in-out infinite}
+    .statement-ai .ai-grid{animation:ai-grid-drift 18s linear infinite}
+    .statement-ai .ai-product{animation:ai-float 8s ease-in-out infinite}
+    .statement-ai .ai-word{opacity:0;transform:translateY(28px) scale(.96);transition:opacity 1s ease .45s,transform 1.2s cubic-bezier(.2,.7,.2,1) .45s}
+    .statement-ai.is-visible .ai-word{opacity:1;transform:none}
+    @keyframes ai-breathe{0%,100%{transform:translate(-50%,-50%) scale(.94);opacity:.75}50%{transform:translate(-50%,-50%) scale(1.04);opacity:1}}
+    @keyframes ai-grid-drift{from{background-position:0 0,0 0}to{background-position:80px 80px,-80px 80px}}
+    @keyframes ai-float{0%,100%{transform:translateY(-50%) rotate(7deg)}50%{transform:translateY(calc(-50% - 10px)) rotate(5deg)}}
+
+    /* Timeline reveal: the line grows first, then each exhibit enters. */
+    .timeline-list{position:relative}
+    .timeline-list:before{content:"";position:absolute;left:0;top:0;width:1px;height:0;background:#111;transition:height 1.4s cubic-bezier(.2,.7,.2,1)}
+    .timeline-list.is-visible:before{height:100%}
+    .timeline-item{opacity:0;transform:translateX(-22px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.7,.2,1),padding .25s}
+    .timeline-item.is-visible{opacity:1;transform:none}
+    .timeline-item:nth-child(2){transition-delay:.06s}.timeline-item:nth-child(3){transition-delay:.12s}.timeline-item:nth-child(4){transition-delay:.18s}.timeline-item:nth-child(5){transition-delay:.24s}.timeline-item:nth-child(6){transition-delay:.30s}.timeline-item:nth-child(7){transition-delay:.36s}
+
+    /* Collection cards behave like objects waiting to be discovered. */
+    .collection-card{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.7,.2,1),background .35s}
+    .collection-card.is-visible{opacity:1;transform:none}
+    .collection-card:nth-child(2){transition-delay:.08s}.collection-card:nth-child(3){transition-delay:.16s}.collection-card:nth-child(4){transition-delay:.24s}.collection-card:nth-child(5){transition-delay:.32s}
+
     @media(max-width:850px){
       .opening{min-height:100svh;padding:0;background:#f7f7f5}
       .opening-copy{left:24px;right:24px;top:15svh;transform:none;text-align:left;max-width:none}
@@ -56,6 +92,15 @@
       .detail-left{left:24px;right:auto;top:55%;transform:translateY(-150px)}
       .detail-right{right:24px;top:65%;transform:none}
       .era-caption{left:24px;right:auto;bottom:90px;font-size:7px}
+      .statement{padding:112px 24px 132px;min-height:100svh}
+      .statement h2{line-height:1.08;letter-spacing:-.075em}
+      .statement-note{margin-top:46px;font-size:15px;line-height:1.7}
+      .statement-black h2 span{margin-top:4px}
+      .statement-ai .ai-orbit{animation-duration:9s}
+      .statement-ai .ai-product{animation-duration:10s}
+      .timeline-list:before{display:none}
+      .timeline-item{transform:translateY(18px)}
+      .collection-card{transform:translateY(18px)}
     }
 
     @media(min-width:851px){.opening-copy{width:42vw}.opening-product{right:3%}}
